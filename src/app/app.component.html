@@ -1,0 +1,70 @@
+<div class="page">
+  <header class="hero">
+    <p class="kicker">RandGym</p>
+    <h1>Rutina aleatoria por grupo muscular</h1>
+    <p class="sub">Pulsa el boton para elegir un ejercicio disponible por grupo.</p>
+    <button id="randExe" class="primary" (click)="generateRandom()">A ejercitarse!</button>
+  </header>
+
+  <section class="cards" *ngIf="hasGenerated">
+    <article class="card" *ngFor="let item of selected">
+      <div class="card-head">
+        <h2>{{ item.grupo }}</h2>
+        <span class="status" [class.done]="isDoneRecently(item.ejercicio)">{{ isDoneRecently(item.ejercicio) ? 'Completo' : 'Pendiente' }}</span>
+      </div>
+
+      <div class="card-body" *ngIf="item.ejercicio; else noExercise">
+        <p class="exercise-name">{{ item.ejercicio?.nombre }}</p>
+        <p class="exercise-values" *ngIf="item.ejercicio">
+          Peso: {{ item.ejercicio.pesoKg || 0 }} kg · Series: {{ item.ejercicio.series || '-' }}
+        </p>
+        <div class="actions">
+          <button
+            class="secondary"
+            (click)="markComplete(item)"
+            [disabled]="isDoneRecently(item.ejercicio)"
+          >
+            Completo
+          </button>
+          <button class="secondary" (click)="toggleEdit(item.grupo)">
+            {{ isEditing(item.grupo) ? 'Editar valores' : 'Cambiar valores' }}
+          </button>
+        </div>
+        <div class="form-row" *ngIf="isEditing(item.grupo)">
+          <label>
+            Peso (kg)
+            <input
+              type="number"
+              min="0"
+              step="0.5"
+              [(ngModel)]="item.ejercicio.pesoKg"
+              (ngModelChange)="persistData()"
+            />
+          </label>
+          <label>
+            Series
+            <input
+              type="text"
+              placeholder="Ej: 3x10"
+              [(ngModel)]="item.ejercicio.series"
+              (ngModelChange)="persistData()"
+            />
+          </label>
+          <button class="secondary save" (click)="closeEdit(item.grupo)">Guardar</button>
+        </div>
+      </div>
+
+      <ng-template #noExercise>
+        <p class="empty">Sin ejercicios disponibles</p>
+      </ng-template>
+    </article>
+  </section>
+
+  <section class="modal" *ngIf="showCongrats">
+    <div class="modal-backdrop" (click)="closeModal()"></div>
+    <div class="modal-card" role="dialog" aria-modal="true">
+      <h3>Felicitaciones! Completaste los 5 ejercicios!</h3>
+      <button class="primary" (click)="closeModal()">Cerrar</button>
+    </div>
+  </section>
+</div>

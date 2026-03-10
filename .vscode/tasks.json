@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "ng: serve",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "start"],
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": [
+          {
+            "regexp": ".*",
+            "file": 1,
+            "location": 2,
+            "message": 3
+          }
+        ],
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "\u001b\[32m.*Starting.*",
+          "endsPattern": "Compiled successfully|\u001b\[32m.*Compiled successfully.*"
+        }
+      }
+    }
+  ]
+}

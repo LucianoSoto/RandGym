@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Zalando+Sans:wght@300;400;500;600;700;800;900&display=swap");
+
+:root {
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --surface-strong: #f1f4fb;
+  --ink: #1a2433;
+  --ink-muted: #5d6b7a;
+  --line: #e1e6ef;
+  --accent: #4f46ff;
+  --accent-2: #00c2ff;
+  --accent-3: #ff7a59;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+}

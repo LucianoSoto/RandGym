@@ -1,0 +1,132 @@
+{
+    "Hombro":  [
+                   {
+                       "nombre":  "Polea unilateral media",
+                       "hechoUltimaVez":  "2020-01-01T00:00:00Z",
+                       "pesoKg":  10,
+                       "series":  "3x8"
+                   },
+                   {
+                       "nombre":  "Elevaciones laterales",
+                       "hechoUltimaVez":  "2020-01-01T00:00:00Z",
+                       "pesoKg":  6,
+                       "series":  "3x10"
+                   },
+                   {
+                       "nombre":  "Press militar",
+                       "hechoUltimaVez":  "2020-01-01T00:00:00Z",
+                       "pesoKg":  6,
+                       "series":  "3x8"
+                   },
+                   {
+                       "nombre":  "Pájaros en maquina",
+                       "hechoUltimaVez":  "2020-01-01T00:00:00Z",
+                       "pesoKg":  10,
+                       "series":  "3x8"
+                   }
+               ],
+    "Espalda":  [
+                    {
+                        "nombre":  "Remo bilateral",
+                        "hechoUltimaVez":  "2020-01-01T00:00:00Z",
+                        "pesoKg":  35,
+                        "series":  "3x10"
+                    },
+                    {
+                        "nombre":  "Remo unilateral en banco",
+                        "hechoUltimaVez":  "2020-01-01T00:00:00Z",
+                        "pesoKg":  35,
+                        "series":  "3x10"
+                    },
+                    {
+                        "nombre":  "Jalón al pecho agarre amplio",
+                        "hechoUltimaVez":  "2020-01-01T00:00:00Z",
+                        "pesoKg":  40,
+                        "series":  "3x10"
+                    },
+                    {
+                        "nombre":  "Remo gironda sentado en máquina",
+                        "hechoUltimaVez":  "2020-01-01T00:00:00Z",
+                        "pesoKg":  40,
+                        "series":  "3x10"
+                    }
+                ],
+    "Pecho":  [
+                  {
+                      "nombre":  "Press de banca plano",
+                      "hechoUltimaVez":  "2020-01-01T00:00:00Z",
+                      "pesoKg":  15,
+                      "series":  "3x10"
+                  },
+                  {
+                      "nombre":  "Press inclinado con mancuernas",
+                      "hechoUltimaVez":  "2020-01-01T00:00:00Z",
+                      "pesoKg":  12,
+                      "series":  "3x12"
+                  },
+                  {
+                      "nombre":  "Aperturas en banco plano",
+                      "hechoUltimaVez":  "2020-01-01T00:00:00Z",
+                      "pesoKg":  10,
+                      "series":  "3x8"
+                  },
+                  {
+                      "nombre":  "Press de pecho en máquina Hammer",
+                      "hechoUltimaVez":  "2020-01-01T00:00:00Z",
+                      "pesoKg":  15,
+                      "series":  "3x10"
+                  }
+              ],
+    "Triceps":  [
+                    {
+                        "nombre":  "Press Frances con barra",
+                        "hechoUltimaVez":  "2020-01-01T00:00:00Z",
+                        "pesoKg":  15,
+                        "series":  "3x10"
+                    },
+                    {
+                        "nombre":  "Extension en polea",
+                        "hechoUltimaVez":  "2020-01-01T00:00:00Z",
+                        "pesoKg":  35,
+                        "series":  "3x8"
+                    },
+                    {
+                        "nombre":  "Pushdown polea",
+                        "hechoUltimaVez":  "2020-01-01T00:00:00Z",
+                        "pesoKg":  40,
+                        "series":  "3x10"
+                    },
+                    {
+                        "nombre":  "Fondos en paralelas",
+                        "hechoUltimaVez":  "2020-01-01T00:00:00Z",
+                        "pesoKg":  0,
+                        "series":  "3x10"
+                    }
+                ],
+    "Biceps":  [
+                   {
+                       "nombre":  "Curl clasico",
+                       "hechoUltimaVez":  "2020-01-01T00:00:00Z",
+                       "pesoKg":  10,
+                       "series":  "3x10"
+                   },
+                   {
+                       "nombre":  "Curl concentrado barra recta",
+                       "hechoUltimaVez":  "2020-01-01T00:00:00Z",
+                       "pesoKg":  10,
+                       "series":  "3x8"
+                   },
+                   {
+                       "nombre":  "Curl tipo martillo",
+                       "hechoUltimaVez":  "2020-01-01T00:00:00Z",
+                       "pesoKg":  10,
+                       "series":  "3x10"
+                   },
+                   {
+                       "nombre":  "Curl en banco inclinado",
+                       "hechoUltimaVez":  "2020-01-01T00:00:00Z",
+                       "pesoKg":  10,
+                       "series":  "3x10"
+                   }
+               ]
+}
