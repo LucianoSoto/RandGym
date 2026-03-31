@@ -1,7 +1,7 @@
 {
     "Hombro":  [
                    {
-                       "nombre":  "Polea unilateral media",
+                       "nombre":  "Polea unilateral",
                        "hechoUltimaVez":  "2020-01-01T00:00:00Z",
                        "pesoKg":  10,
                        "series":  "3x8"
@@ -91,9 +91,9 @@
                         "series":  "3x8"
                     },
                     {
-                        "nombre":  "Pushdown polea",
+                        "nombre":  "Triceps mancuerna",
                         "hechoUltimaVez":  "2020-01-01T00:00:00Z",
-                        "pesoKg":  40,
+                        "pesoKg":  15,
                         "series":  "3x10"
                     },
                     {
@@ -145,7 +145,7 @@
                    {
                        "nombre":  "Abdominales oblicuos",
                        "hechoUltimaVez":  "2020-01-01T00:00:00Z",
-                       "pesoKg":  10,
+                       "pesoKg":  0,
                        "series":  "3x10"
                    }
                ],

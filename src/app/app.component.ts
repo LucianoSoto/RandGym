@@ -25,6 +25,39 @@ type NewExerciseForm = {
 const EXERCISES = exercisesData as Record<string, Exercise[]>;
 const STORAGE_KEY = 'randgym.exercises';
 
+const GIF_BY_KEY: Record<string, string> = {
+  'abdominales oblicuos': 'Abdominales oblicuos.gif',
+  'aperturas en banco plano': 'Aperturas en banco plano.gif',
+  'bicicleta': 'Bicicleta.gif',
+  'cinta': 'Cinta.gif',
+  'curl clasico': 'Curl clasico.gif',
+  'curl concentrado barra recta': 'Curl concentrado barra recta.gif',
+  'curl en banco inclinado': 'Curl en banco inclinado.gif',
+  'curl martillo': 'Curl martillo.gif',
+  'elevaciones laterales': 'Elevaciones laterales.gif',
+  'extension en polea': 'Extension en polea.gif',
+  'fondos en paralelas': 'Fondos en paralelas.gif',
+  'jalon al pecho agarre amplio': 'Jalon al pecho agarre amplio.gif',
+  'pajaros en maquina': 'Pajaros en maquina.gif',
+  'plancha': 'Plancha.gif',
+  'polea unilateral': 'Polea unilateral.gif',
+  'press de banca plano': 'Press de banca plano.gif',
+  'press de pecho en maquina hammer': 'Press de pecho en maquina hammer.gif',
+  'press frances con barra': 'Press frances con barra.gif',
+  'press inclinado con mancuernas': 'Press inclinado con mancuernas.gif',
+  'press militar': 'Press militar.gif',
+  'remo bilateral': 'Remo bilateral.gif',
+  'remo gironda sentado en maquina': 'Remo gironda sentado en maquina.gif',
+  'remo unilateral en banco': 'Remo unilateral en banco.gif',
+  'sit ups': 'Sit ups.gif',
+  'triceps mancuerna': 'Triceps mancuerna.gif'
+};
+
+const GIF_KEY_OVERRIDES: Record<string, string> = {
+  'polea unilateral media': 'polea unilateral',
+  'curl tipo martillo': 'curl martillo'
+};
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -50,6 +83,13 @@ const STORAGE_KEY = 'randgym.exercises';
 
           <div class="card-body" *ngIf="item.ejercicio; else noExercise">
             <p class="exercise-name">{{ item.ejercicio?.nombre }}</p>
+            <img
+              *ngIf="getExerciseGif(item.ejercicio) as gifSrc"
+              class="exercise-gif"
+              [src]="gifSrc"
+              [alt]="item.ejercicio?.nombre"
+              loading="lazy"
+            />
             <p class="exercise-values" *ngIf="item.ejercicio">
               Peso: {{ item.ejercicio.pesoKg || 0 }} kg · Series: {{ item.ejercicio.series || '-' }}
             </p>
@@ -60,6 +100,9 @@ const STORAGE_KEY = 'randgym.exercises';
                 [disabled]="isDoneRecently(item.ejercicio)"
               >
                 Completo
+              </button>
+              <button class="secondary" (click)="selectAnother(item)">
+                Seleccionar otro
               </button>
               <button class="secondary" (click)="toggleEdit(item.grupo)">
                 {{ isEditing(item.grupo) ? 'Editar valores' : 'Cambiar valores' }}
@@ -280,6 +323,16 @@ const STORAGE_KEY = 'randgym.exercises';
         margin: 0 0 10px;
       }
 
+      .exercise-gif {
+        width: 100%;
+        max-height: 220px;
+        object-fit: cover;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: #ffffff;
+        margin-bottom: 12px;
+      }
+
       .exercise-values {
         margin: 0 0 12px;
         font-size: 18px;
@@ -483,8 +536,7 @@ export class AppComponent {
     this.showCongrats = false;
     this.editing = {};
   }
-
-  markComplete(item: SelectedItem): void {
+  markComplete(item: SelectedItem): void {
     if (!item.ejercicio) {
       return;
     }
@@ -493,6 +545,61 @@ export class AppComponent {
     this.checkCompletion();
   }
 
+  selectAnother(item: SelectedItem): void {
+    const grupo = item.grupo;
+    const list = this.data[grupo] ?? [];
+    const available = list.filter((e) => this.isAvailable(e));
+    if (available.length === 0) {
+      item.ejercicio = null;
+      return;
+    }
+    const currentName = item.ejercicio?.nombre;
+    const alternatives = currentName
+      ? available.filter((e) => e.nombre !== currentName)
+      : available;
+    const pool = alternatives.length > 0 ? alternatives : available;
+    const index = Math.floor(Math.random() * pool.length);
+    item.ejercicio = pool[index];
+  }
+  getExerciseGif(exercise: Exercise | null): string | null {
+    if (!exercise) {
+      return null;
+    }
+    const key = this.resolveGifKey(exercise.nombre);
+    const fileName = GIF_BY_KEY[key];
+    return fileName ? `assets/exercises/${fileName}` : null;
+  }
+
+  private resolveGifKey(name: string): string {
+    const key = this.normalizeKey(name);
+    return GIF_KEY_OVERRIDES[key] ?? key;
+  }
+
+  private normalizeKey(value: string): string {
+    const fixed = this.fixMojibake(value)
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, ' ')
+      .trim();
+    return fixed;
+  }
+
+  private fixMojibake(value: string): string {
+    return value
+      .replace(/Ã¡/g, 'á')
+      .replace(/Ã©/g, 'é')
+      .replace(/Ã­/g, 'í')
+      .replace(/Ã³/g, 'ó')
+      .replace(/Ãº/g, 'ú')
+      .replace(/Ã±/g, 'ñ')
+      .replace(/Ã/g, 'Á')
+      .replace(/Ã‰/g, 'É')
+      .replace(/Ã/g, 'Í')
+      .replace(/Ã“/g, 'Ó')
+      .replace(/Ãš/g, 'Ú')
+      .replace(/Ã‘/g, 'Ñ');
+  }
   private pickRandom(grupo: string): Exercise | null {
     const list = this.data[grupo] ?? [];
     const available = list.filter((e) => this.isAvailable(e));
@@ -525,11 +632,6 @@ export class AppComponent {
     const weekMs = 7 * 24 * 60 * 60 * 1000;
     return diffMs > weekMs;
   }
-
-  closeModal(): void {
-    this.showCongrats = false;
-  }
-
   openAdd(): void {
     this.newExercise = this.defaultNewExercise();
     this.showAddModal = true;
@@ -619,5 +721,12 @@ export class AppComponent {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
   }
 }
+
+
+
+
+
+
+
 
 
