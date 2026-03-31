@@ -24,6 +24,7 @@ type NewExerciseForm = {
 
 const EXERCISES = exercisesData as Record<string, Exercise[]>;
 const STORAGE_KEY = 'randgym.exercises';
+const DEFAULT_LAST_DONE = '2020-01-01T00:00:00Z';
 
 const GIF_BY_KEY: Record<string, string> = {
   'abdominales oblicuos': 'Abdominales oblicuos.gif',
@@ -71,6 +72,8 @@ const GIF_KEY_OVERRIDES: Record<string, string> = {
         <div class="hero-actions">
           <button id="randExe" class="primary" (click)="generateRandom()">A ejercitarse!</button>
           <button class="primary" (click)="openAdd()">Agregar ejercicio</button>
+        
+          <button class="primary" (click)="resetExercises()">Reiniciar ejercicios</button>
         </div>
       </header>
 
@@ -79,7 +82,9 @@ const GIF_KEY_OVERRIDES: Record<string, string> = {
           <div class="card-head">
             <h2>{{ item.grupo }}</h2>
             <span class="status" [class.done]="isDoneRecently(item.ejercicio)">{{ isDoneRecently(item.ejercicio) ? 'Completo' : 'Pendiente' }}</span>
-          </div>          <div class="card-body" *ngIf="item.ejercicio; else noExercise">
+          </div>
+
+          <div class="card-body" *ngIf="item.ejercicio; else noExercise">
             <div class="exercise-media">
               <img
                 *ngIf="getExerciseGif(item.ejercicio) as gifSrc"
@@ -672,6 +677,16 @@ export class AppComponent {
     this.showAddModal = false;
   }
 
+  resetExercises(): void {
+    Object.values(this.data).forEach((group) => {
+      group.forEach((exercise) => {
+        exercise.hechoUltimaVez = DEFAULT_LAST_DONE;
+      });
+    });
+    this.persistData();
+    this.showCongrats = false;
+  }
+
   addExercise(): void {
     const nombre = this.newExercise.nombre.trim();
     if (!nombre) {
@@ -752,6 +767,14 @@ export class AppComponent {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
   }
 }
+
+
+
+
+
+
+
+
 
 
 
