@@ -70,7 +70,7 @@ const GIF_KEY_OVERRIDES: Record<string, string> = {
         <p class="sub">Pulsa el boton para elegir un ejercicio disponible por grupo.</p>
         <div class="hero-actions">
           <button id="randExe" class="primary" (click)="generateRandom()">A ejercitarse!</button>
-          <button class="primary alt" (click)="openAdd()">Agregar ejercicio</button>
+          <button class="primary" (click)="openAdd()">Agregar ejercicio</button>
         </div>
       </header>
 
@@ -79,56 +79,58 @@ const GIF_KEY_OVERRIDES: Record<string, string> = {
           <div class="card-head">
             <h2>{{ item.grupo }}</h2>
             <span class="status" [class.done]="isDoneRecently(item.ejercicio)">{{ isDoneRecently(item.ejercicio) ? 'Completo' : 'Pendiente' }}</span>
-          </div>
-
-          <div class="card-body" *ngIf="item.ejercicio; else noExercise">
-            <p class="exercise-name">{{ item.ejercicio?.nombre }}</p>
-            <img
-              *ngIf="getExerciseGif(item.ejercicio) as gifSrc"
-              class="exercise-gif"
-              [src]="gifSrc"
-              [alt]="item.ejercicio?.nombre"
-              loading="lazy"
-            />
-            <p class="exercise-values" *ngIf="item.ejercicio">
-              Peso: {{ item.ejercicio.pesoKg || 0 }} kg · Series: {{ item.ejercicio.series || '-' }}
-            </p>
-            <div class="actions">
-              <button
-                class="secondary"
-                (click)="markComplete(item)"
-                [disabled]="isDoneRecently(item.ejercicio)"
-              >
-                Completo
-              </button>
-              <button class="secondary" (click)="selectAnother(item)">
-                Seleccionar otro
-              </button>
-              <button class="secondary" (click)="toggleEdit(item.grupo)">
-                {{ isEditing(item.grupo) ? 'Editar valores' : 'Cambiar valores' }}
-              </button>
+          </div>          <div class="card-body" *ngIf="item.ejercicio; else noExercise">
+            <div class="exercise-media">
+              <img
+                *ngIf="getExerciseGif(item.ejercicio) as gifSrc"
+                class="exercise-gif"
+                [src]="gifSrc"
+                [alt]="item.ejercicio?.nombre"
+                loading="lazy"
+              />
             </div>
-            <div class="form-row" *ngIf="isEditing(item.grupo)">
-              <label>
-                Peso (kg)
-                <input
-                  type="number"
-                  min="0"
-                  step="0.5"
-                  [(ngModel)]="item.ejercicio.pesoKg"
-                  (ngModelChange)="persistData()"
-                />
-              </label>
-              <label>
-                Series
-                <input
-                  type="text"
-                  placeholder="Ej: 3x10"
-                  [(ngModel)]="item.ejercicio.series"
-                  (ngModelChange)="persistData()"
-                />
-              </label>
-              <button class="secondary save" (click)="closeEdit(item.grupo)">Guardar</button>
+            <div class="exercise-content">
+              <p class="exercise-name">{{ item.ejercicio?.nombre }}</p>
+              <p class="exercise-values" *ngIf="item.ejercicio">
+                Peso: {{ item.ejercicio.pesoKg || 0 }} kg · Series: {{ item.ejercicio.series || '-' }}
+              </p>
+              <div class="actions">
+                <button
+                  class="secondary"
+                  (click)="markComplete(item)"
+                  [disabled]="isDoneRecently(item.ejercicio)"
+                >
+                  Completo
+                </button>
+                <button class="secondary" (click)="selectAnother(item)">
+                  Seleccionar otro
+                </button>
+                <button class="secondary" (click)="toggleEdit(item.grupo)">
+                  {{ isEditing(item.grupo) ? 'Editar valores' : 'Cambiar valores' }}
+                </button>
+              </div>
+              <div class="form-row" *ngIf="isEditing(item.grupo)">
+                <label>
+                  Peso (kg)
+                  <input
+                    type="number"
+                    min="0"
+                    step="0.5"
+                    [(ngModel)]="item.ejercicio.pesoKg"
+                    (ngModelChange)="persistData()"
+                  />
+                </label>
+                <label>
+                  Series
+                  <input
+                    type="text"
+                    placeholder="Ej: 3x10"
+                    [(ngModel)]="item.ejercicio.series"
+                    (ngModelChange)="persistData()"
+                  />
+                </label>
+                <button class="secondary save" (click)="closeEdit(item.grupo)">Guardar</button>
+              </div>
             </div>
           </div>
 
@@ -289,6 +291,20 @@ const GIF_KEY_OVERRIDES: Record<string, string> = {
         gap: 14px;
         min-height: 210px;
         box-shadow: 0 16px 36px rgba(15, 24, 40, 0.06);
+      }
+
+      .card-body {
+        display: grid;
+        gap: 16px;
+      }
+
+      .exercise-media {
+        width: 100%;
+      }
+
+      .exercise-content {
+        display: flex;
+        flex-direction: column;
       }
 
       .card-head {
@@ -479,6 +495,21 @@ const GIF_KEY_OVERRIDES: Record<string, string> = {
       .modal-card h3 {
         margin: 0 0 16px;
         font-size: 28px;
+      }
+
+      @media (min-width: 900px) {
+        .card-body {
+          grid-template-columns: 280px 1fr;
+          align-items: start;
+        }
+
+        .exercise-gif {
+          max-height: 260px;
+        }
+
+        .actions {
+          justify-content: flex-end;
+        }
       }
 
       @media (max-width: 720px) {
@@ -721,6 +752,11 @@ export class AppComponent {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
   }
 }
+
+
+
+
+
 
 
 
