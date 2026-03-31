@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+﻿import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import exercisesData from '../assets/exercises.json';
@@ -590,15 +590,20 @@ export class AppComponent {
 
 
   private loadData(): Record<string, Exercise[]> {
+    const base = structuredClone(EXERCISES);
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
       try {
-        return JSON.parse(raw) as Record<string, Exercise[]>;
+        const stored = JSON.parse(raw) as Record<string, Exercise[]>;
+        return {
+          ...base,
+          ...stored
+        };
       } catch {
         // Fallback to bundled data if local storage is corrupt.
       }
     }
-    return structuredClone(EXERCISES);
+    return base;
   }
 
   private defaultNewExercise(): NewExerciseForm {
@@ -614,3 +619,5 @@ export class AppComponent {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
   }
 }
+
+
