@@ -363,7 +363,7 @@ const GIF_KEY_OVERRIDES: Record<string, string> = {
       .actions {
         display: flex;
         flex-wrap: wrap;
-        justify-content: flex-end;
+        justify-content: flex-center;
         gap: 12px;
         margin-bottom: 12px;
       }
@@ -572,7 +572,8 @@ export class AppComponent {
     this.showCongrats = false;
     this.editing = {};
   }
-  markComplete(item: SelectedItem): void {
+
+  markComplete(item: SelectedItem): void {
     if (!item.ejercicio) {
       return;
     }

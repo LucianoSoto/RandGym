@@ -1,15 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Zalando+Sans:wght@300;400;500;600;700;800;900&display=swap");
-
 :root {
-  --bg: #f6f7fb;
-  --surface: #ffffff;
-  --surface-strong: #f1f4fb;
-  --ink: #1a2433;
-  --ink-muted: #5d6b7a;
-  --line: #e1e6ef;
-  --accent: #4f46ff;
-  --accent-2: #00c2ff;
-  --accent-3: #ff7a59;
+  --bg: #080808;
+  --surface: #111111;
+  --surface-strong: #1c1c1c;
+  --ink: #f5f5f5;
+  --ink-muted: #a5a5a5;
+  --line: #303030;
+  --accent: #f6c22b;
+  --accent-2: #e3a900;
+  --accent-3: #d18f00;
 }
 
 * {
@@ -19,4 +17,90 @@
 body {
   margin: 0;
   background: var(--bg);
+  color: var(--ink);
+  font-family: "DM Sans", Arial, sans-serif;
+}
+
+/* Estética editorial oscura inspirada en la landing de referencia. */
+app-root:not(#legacy) .page {
+  width: min(1180px, 100%);
+  padding: 24px 28px 80px;
+  font-family: "DM Sans", Arial, sans-serif;
+}
+
+app-root:not(#legacy) .hero {
+  position: relative;
+  display: flex;
+  min-height: 510px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  overflow: hidden;
+  padding: 20px clamp(28px, 7vw, 88px) 48px;
+  border: 1px solid #292929;
+  border-radius: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,.94), rgba(0,0,0,.72) 42%, rgba(0,0,0,.13)), radial-gradient(ellipse at 72% 30%, #4a4a4a, #222 24%, #101010 53%, #050505 78%);
+  box-shadow: 0 28px 80px rgba(0,0,0,.48);
+}
+
+app-root:not(#legacy) .hero::after {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 2%;
+  color: rgba(255,255,255,.045);
+  content: "RANDGYM";
+  font: 800 clamp(90px, 19vw, 250px)/.8 "Barlow Condensed", Impact, sans-serif;
+  letter-spacing: -.04em;
+  pointer-events: none;
+}
+
+app-root:not(#legacy) .hero > * { position: relative; z-index: 1; }
+app-root:not(#legacy) .kicker { margin: 0 0 12px; color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+app-root:not(#legacy) h1, app-root:not(#legacy) h2, app-root:not(#legacy) .modal-card h3 { font-family: "Barlow Condensed", Impact, sans-serif; font-weight: 700; letter-spacing: .015em; text-transform: uppercase; }
+app-root:not(#legacy) h1 { max-width: 760px; margin: 0 0 12px; color: #fff; font-size: clamp(48px, 7vw, 82px); line-height: .95; }
+app-root:not(#legacy) .sub { max-width: 470px; margin: 0 0 28px; color: #c0c0c0; font-size: 15px; line-height: 1.7; }
+app-root:not(#legacy) .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+app-root:not(#legacy) .primary { min-height: 44px; padding: 12px 24px; border: 1px solid var(--accent); border-radius: 0; background: var(--accent); color: #090909; font: 700 14px "DM Sans", Arial, sans-serif; letter-spacing: .04em; text-transform: uppercase; }
+app-root:not(#legacy) .primary:hover { background: #ffd34b; box-shadow: none; transform: translateY(-2px); }
+app-root:not(#legacy) .hero-actions .primary:not(:first-child) { border-color: #777; background: transparent; color: #f5f5f5; }
+app-root:not(#legacy) .hero-actions .primary:not(:first-child):hover { border-color: var(--accent); color: var(--accent); }
+app-root:not(#legacy) .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 32px; }
+app-root:not(#legacy) .card { min-height: 220px; padding: 20px; border: 1px solid #292929; border-radius: 0; background: #101010; box-shadow: none; }
+app-root:not(#legacy) .card:hover { transform: translateY(-3px); border-color: #666; }
+app-root:not(#legacy) .card-head { gap: 12px; }
+app-root:not(#legacy) h2 { color: #f4f4f4; font-size: 27px; }
+app-root:not(#legacy) .status { padding: 5px 9px; border: 1px solid #393939; border-radius: 0; background: transparent; color: #b8b8b8; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+app-root:not(#legacy) .status.done { border-color: rgba(246,194,43,.5); background: transparent; color: var(--accent); }
+app-root:not(#legacy) .card-body { display: grid; gap: 16px; }
+app-root:not(#legacy) .exercise-media { width: 100%; overflow: hidden; background: #191919; }
+app-root:not(#legacy) .exercise-gif { display: block; width: 100%; max-height: 270px; margin: 0; border: 0; border-radius: 0; object-fit: cover; filter: grayscale(1) contrast(1.08); }
+app-root:not(#legacy) .exercise-name { margin: 0 0 8px; color: #f5f5f5; font-size: 20px; }
+app-root:not(#legacy) .exercise-values { color: #a3a3a3; font-size: 13px; }
+app-root:not(#legacy) .actions { justify-content: flex-start; gap: 8px; margin: auto 0 8px; }
+app-root:not(#legacy) .secondary { min-height: 38px; margin-top: 6px; padding: 9px 14px; border: 1px solid #484848; border-radius: 0; background: transparent; color: #e3e3e3; font: 600 12px "DM Sans", Arial, sans-serif; letter-spacing: .035em; text-transform: uppercase; }
+app-root:not(#legacy) .secondary:hover { border-color: var(--accent); color: var(--accent); box-shadow: none; }
+app-root:not(#legacy) .form-row label { color: #b8b8b8; font-size: 12px; letter-spacing: .05em; text-transform: uppercase; }
+app-root:not(#legacy) .form-row input, app-root:not(#legacy) .form-row select { width: 100%; min-height: 42px; padding: 10px 12px; border: 1px solid #404040; border-radius: 0; outline: 0; background: #090909; color: #f1f1f1; font: 14px "DM Sans", Arial, sans-serif; }
+app-root:not(#legacy) .form-row input:focus, app-root:not(#legacy) .form-row select:focus { border-color: var(--accent); outline: 1px solid var(--accent); }
+app-root:not(#legacy) .modal-backdrop { background: rgba(0,0,0,.82); backdrop-filter: blur(5px); }
+app-root:not(#legacy) .modal-card { border: 1px solid #3a3a3a; border-radius: 0; background: #111; box-shadow: 0 30px 80px #000; }
+app-root:not(#legacy) .modal-card h3 { color: #fff; font-size: 32px; }
+
+@media (min-width: 900px) {
+  app-root:not(#legacy) .card-body { grid-template-columns: minmax(180px, 38%) 1fr; align-items: stretch; }
+  app-root:not(#legacy) .exercise-gif { height: 100%; min-height: 190px; max-height: 250px; }
+}
+@media (max-width: 720px) {
+  app-root:not(#legacy) .page { padding: 12px 14px 48px; }
+  app-root:not(#legacy) .hero { min-height: 440px; padding: 32px 24px; }
+  app-root:not(#legacy) .hero-actions { flex-direction: column; align-items: stretch; }
+  app-root:not(#legacy) .hero-actions .primary { width: 100%; }
+  app-root:not(#legacy) .cards { grid-template-columns: 1fr; gap: 13px; margin-top: 22px; }
+  app-root:not(#legacy) .card { padding: 16px; }
+  app-root:not(#legacy) .form-row { grid-template-columns: 1fr; }
+  app-root:not(#legacy) .modal-card { padding: 24px 20px; }
+  app-root:not(#legacy) .modal-actions { grid-template-columns: 1fr; }
 }
