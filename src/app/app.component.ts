@@ -148,7 +148,7 @@ const GIF_KEY_OVERRIDES: Record<string, string> = {
       <section class="modal" *ngIf="showCongrats">
         <div class="modal-backdrop" (click)="closeModal()"></div>
         <div class="modal-card" role="dialog" aria-modal="true">
-          <h3>Felicitaciones! Completaste los 5 ejercicios!</h3>
+          <h3>Felicitactiones! Completaste todos los ejercicios!</h3>
           <button class="primary" (click)="closeModal()">Cerrar</button>
         </div>
       </section>
@@ -678,6 +678,10 @@ export class AppComponent {
     this.showAddModal = false;
   }
 
+  closeModal(): void {
+    this.showCongrats = false;
+  }
+
   resetExercises(): void {
     Object.values(this.data).forEach((group) => {
       group.forEach((exercise) => {
@@ -768,7 +772,6 @@ export class AppComponent {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
   }
 }
-
 
 
 
